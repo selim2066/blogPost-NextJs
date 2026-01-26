@@ -60,10 +60,10 @@ interface Navbar1Props {
 
 const Navbar = ({
   logo = {
-    url: "https://www.shadcnblocks.com",
+    url: "https://github.com/selim2066",
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
     alt: "logo",
-    title: "Shadcnblocks.com",
+    title: "BlogPost-MSR",
   },
   menu = [
     { title: "Home", url: "/" },
@@ -73,7 +73,7 @@ const Navbar = ({
   ],
   auth = {
     login: { title: "Login", url: "/login" },
-    signup: { title: "Sign up", url: "/sign-up" },
+    signup: { title: "Sign up", url: "#" },
   },
   className,
 }: Navbar1Props) => {
