@@ -125,6 +125,7 @@ const Navbar = ({
                 alt={logo.alt}
               />
             </a>
+            
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon">
@@ -133,7 +134,7 @@ const Navbar = ({
               </SheetTrigger>
               <SheetContent className="overflow-y-auto">
                 <SheetHeader>
-                  <SheetTitle>
+                  <SheetTitle className="flex flex-col gap-5" >
                     <a href={logo.url} className="flex items-center gap-2">
                       <img
                         src={logo.src}
@@ -141,6 +142,7 @@ const Navbar = ({
                         alt={logo.alt}
                       />
                     </a>
+                  <ModeToggle />
                   </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-6 p-4">
