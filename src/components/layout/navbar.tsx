@@ -7,9 +7,7 @@ import { cn } from "@/lib/utils";
 
 import {
   Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
+ 
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
