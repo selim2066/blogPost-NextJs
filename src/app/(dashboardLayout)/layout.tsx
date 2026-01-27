@@ -19,7 +19,7 @@ import {
 
 
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({ user, admin }: { user: React.ReactNode; admin: React.ReactNode }) {
   return (
 
     
@@ -46,7 +46,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </BreadcrumbList>
           </Breadcrumb>
         </header>
-        {children}
+        {user}
+        {admin}
       </SidebarInset>
     </SidebarProvider>
   )

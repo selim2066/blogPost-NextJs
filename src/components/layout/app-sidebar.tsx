@@ -1,19 +1,20 @@
 import * as React from "react";
 
-import { SearchForm } from "@/components/layout/search-form";
-import { VersionSwitcher } from "@/components/layout/version-switcher";
+// import { SearchForm } from "@/components/layout/search-form";
+// import { VersionSwitcher } from "@/components/layout/version-switcher";
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
-  SidebarHeader,
+  //SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import Link from "next/link";
 
 // This is sample data.
 const data = {
@@ -24,12 +25,12 @@ const data = {
       url: "#",
       items: [
          {
-          title: "Write Blog",
-          url: "/dashboard/write-blog",
+          title: "Admin Dashboard",
+          url: "/admin-dashboard",
         },
         {
-          title: "Analytics",
-          url: "/dashboard/analytics",
+          title: "User Dashboard",
+          url: "/dashboard",
         },
       ],
     },
@@ -50,8 +51,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <SidebarMenu>
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.isActive}>
-                      <a href={item.url}>{item.title}</a>
+                    <SidebarMenuButton asChild>
+                      <Link href={item.url}>{item.title}</Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
