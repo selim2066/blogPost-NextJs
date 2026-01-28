@@ -1,4 +1,4 @@
-
+import {Route} from "@/types";
 export  const userRoutes = [ {
       title: "Blog Management",
       url: "#",
