@@ -21,7 +21,7 @@ import {
 
 export default function DashboardLayout({ user, admin }: { user: React.ReactNode; admin: React.ReactNode }) {
 
-  const userInfo ={role:'user'}
+  const userInfo ={role:'admin'}
   return (
 
     
