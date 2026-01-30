@@ -15,6 +15,8 @@ import {
 import { Input } from "@/components/ui/input"
 
 export function RegistrationForm({ ...props }: React.ComponentProps<typeof Card>) {
+
+  
   return (
     <Card {...props}>
       <CardHeader>
