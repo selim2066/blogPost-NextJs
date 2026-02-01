@@ -27,6 +27,9 @@ export function LoginForm({
     // Implement Google login logic here
     const data = await authClient.signIn.social({ provider: 'google', callbackURL: 'http://localhost:3000' })
   }
+
+  const session = authClient.useSession()
+  console.log("session is here .........", session)
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>

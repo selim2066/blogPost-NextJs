@@ -3,7 +3,7 @@ import { authClient } from "@/lib/auth-client";
 
 export default async function Home() {
   const session = await authClient.getSession();
-  console.log(session)
+  console.log("this is session from home and its server side session",session)
   return (
     <div>
       <Button>Click MSR</Button>
