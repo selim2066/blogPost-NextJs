@@ -1,9 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { authClient } from "@/lib/auth-client";
+//import { authClient } from "@/lib/auth-client";
+import { userService } from "@/service/user.service";
 
 export default async function Home() {
-  const session = await authClient.getSession();
-  console.log("this is session from home and its server side session",session)
+  // const session = await authClient.getSession();
+  // console.log("this is session from home and its server side session",session)
+  const {data, error}= await userService.getSession();
+  console.log(data,error)
   return (
     <div>
       <Button>Click MSR</Button>
