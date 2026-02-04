@@ -31,3 +31,9 @@ export const userService = {
     }
   },
 };
+
+// ! important installaion:
+// npm i @t3-oss/env-nextjs
+// for env type safety and validation
+// then create src/env.ts file
+// then import env where needed
