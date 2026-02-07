@@ -45,32 +45,31 @@ export const blogService = {
       // Converts params object into key=value pairs
       if (params) {
         Object.entries(params).forEach(([key, value]) => {
-          // Only add meaningful values to query string
-          // Prevents URLs like ?search=&isFeatured=
           if (value !== undefined && value !== null && value !== "") {
             url.searchParams.append(key, String(value));
           }
         });
       }
 
-      // Build fetch configuration object dynamically
+      //! Build fetch configuration object dynamically
       // This allows same function to support SSG, SSR, and ISR
+     
       const config: RequestInit = {};
 
-      // If revalidate is provided, enable ISR
-      // Next.js will cache and revalidate after X seconds
-      if (options?.revalidate !== undefined) {
+      /* ##1 If revalidate is provided, enable ISR
+       Next.js will cache and revalidate after X seconds*/
+      
+       if (options?.revalidate !== undefined) {
         config.next = { revalidate: options.revalidate };
       }
 
-      // If cache option is provided, control fetch caching behavior
-      // Example: cache: "no-store" => always fresh data (SSR)
+      /* ##2 If cache option is provided, control fetch caching behavior
+       Example: cache: "no-store" => always fresh data (SSR)
+      */
+
       if (options?.cache) {
         config.cache = options.cache;
       }
-
-      // Log final URL for debugging and verification
-      console.log(url.toString());
 
       // Perform the actual HTTP request
       const res = await fetch(url.toString(), config);
@@ -78,12 +77,10 @@ export const blogService = {
       // Parse JSON response from backend
       const data = await res.json();
 
-      // Standardized success response
+    
       return { postData: data, error: null };
 
     } catch (error) {
-      // Centralized error handling for service layer
-      // Makes UI error handling consistent
       return {
         data: null,
         error: {
@@ -94,3 +91,11 @@ export const blogService = {
     }
   },
 };
+
+// !This file is a blog service that fetches blog posts from your backend API in a flexible way.
+
+// Main Goal:
+
+// 👉 Build a dynamic API URL with optional query parameters
+// 👉 Fetch blog posts from backend
+// 👉 Support SSG / ISR / SSR behavior in Next.js
