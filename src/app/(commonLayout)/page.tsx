@@ -16,12 +16,12 @@ export default async function Home() {
     error,
   );
 
-  const { postData } = await blogService.getBlogs(
+  const { postData } = await blogService.getBlogPosts(
     { isFeatured: true },
     { cache: "no-store" },
   );
 
-  
+
   console.log("post data.......", postData);
   return (
     <div className="container mx-auto py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:px-15">

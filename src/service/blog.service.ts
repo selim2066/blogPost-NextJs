@@ -1,4 +1,5 @@
 import { env } from "@/env";
+import { get } from "http";
 
 // Base API URL loaded from environment variables
 // This allows changing backend URL without touching code
@@ -29,13 +30,14 @@ interface ServiceOptions {
 }
 
 export const blogService = {
+//  !getALLblogPosts
   /**
    * Fetch blogs from backend API with optional filters and caching options
    *
    * @param params   Optional query filters (isFeatured, search)
    * @param options  Optional Next.js fetch configuration (cache, revalidate)
    */
-  getBlogs: async (params?: GetBlogsParams, options?: ServiceOptions) => {
+  getBlogPosts: async (params?: GetBlogsParams, options?: ServiceOptions) => {
     try {
       // Create a URL object for safe and structured URL manipulation
       // This avoids manual string concatenation mistakes
@@ -90,8 +92,23 @@ export const blogService = {
       };
     }
   },
-};
 
+  // !getBlogPostById
+  getBlogPostById: async (id: string) => {
+    try {
+      const res = await fetch(`${API_URL}/post/${id}`); 
+      const data = await res.json();
+      return { postData: data, error: null };
+    } catch (error) {
+      return {
+        data: null,
+        error: {
+          message: "Error fetching blog post by ID {blog.service.ts}",
+          details: error,
+        },
+      };
+    }
+  }}
 // !This file is a blog service that fetches blog posts from your backend API in a flexible way.
 
 // Main Goal:
