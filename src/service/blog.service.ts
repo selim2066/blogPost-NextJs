@@ -1,5 +1,4 @@
 import { env } from "@/env";
-import { get } from "http";
 
 // Base API URL loaded from environment variables
 // This allows changing backend URL without touching code
@@ -19,18 +18,18 @@ const API_URL = env.API_URL;
 // These are used to build URL query string (?isFeatured=true&search=react)
 interface GetBlogsParams {
   isFeatured?: boolean; // Filter for featured blogs
-  search?: string;      // Search keyword for blogs
+  search?: string; // Search keyword for blogs
 }
 
 // Options to control Next.js fetch behavior
 // This allows caller to decide caching & revalidation strategy
 interface ServiceOptions {
   cache?: RequestCache; // e.g. "no-store", "force-cache"
-  revalidate?: number;  // ISR revalidation time in seconds
+  revalidate?: number; // ISR revalidation time in seconds
 }
 
 export const blogService = {
-//  !getALLblogPosts
+  //  !getALLblogPosts
   /**
    * Fetch blogs from backend API with optional filters and caching options
    *
@@ -55,13 +54,13 @@ export const blogService = {
 
       //! Build fetch configuration object dynamically
       // This allows same function to support SSG, SSR, and ISR
-     
+
       const config: RequestInit = {};
 
       /* ##1 If revalidate is provided, enable ISR
        Next.js will cache and revalidate after X seconds*/
-      
-       if (options?.revalidate !== undefined) {
+
+      if (options?.revalidate !== undefined) {
         config.next = { revalidate: options.revalidate };
       }
 
@@ -79,9 +78,7 @@ export const blogService = {
       // Parse JSON response from backend
       const data = await res.json();
 
-    
       return { postData: data, error: null };
-
     } catch (error) {
       return {
         data: null,
@@ -96,7 +93,7 @@ export const blogService = {
   // !getBlogPostById
   getBlogPostById: async (id: string) => {
     try {
-      const res = await fetch(`${API_URL}/post/${id}`); 
+      const res = await fetch(`${API_URL}/post/${id}`);
       const data = await res.json();
       return { postData: data, error: null };
     } catch (error) {
@@ -108,7 +105,8 @@ export const blogService = {
         },
       };
     }
-  }}
+  },
+};
 // !This file is a blog service that fetches blog posts from your backend API in a flexible way.
 
 // Main Goal:
