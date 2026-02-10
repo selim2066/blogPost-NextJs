@@ -3,6 +3,11 @@ import { Separator } from "@/components/ui/separator";
 import { blogService } from "@/service/blog.service";
 import { BlogPost } from "@/types";
 
+export async function generateStaticParams(){
+  const {postData}= await blogService.getBlogPosts()
+return postData?.data?.map((blog:BlogPost)=>({
+  id: blog.id})).slice(0,3) // Generate static paths for first 3 blogs
+}
 
 export default async function BlogPage({
   params,
