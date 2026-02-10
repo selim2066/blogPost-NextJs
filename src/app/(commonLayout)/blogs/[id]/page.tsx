@@ -10,7 +10,10 @@ export default async function BlogPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const { data: blog } = await blogService.getBlogPostById(id);
+  const { postData: blog } = await blogService.getBlogPostById(id);
+  if(!blog){
+    return <div>No Blog found</div>
+  }
 
    const formattedDate = new Date(blog.createdAt).toLocaleDateString("en-US", {
     year: "numeric",

@@ -1,4 +1,5 @@
 export interface BlogPost {
+  createdAt: string | number | Date;
   id: string | number;
   title: string;
   content: string;
