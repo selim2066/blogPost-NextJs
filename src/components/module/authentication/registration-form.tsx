@@ -9,8 +9,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { FieldGroup, Field } from "@/components/ui/field";
-import {useForm } from "@tanstack/react-form";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { useForm } from "@tanstack/react-form";
 
 export function RegistrationForm({
   ...props
@@ -18,7 +19,7 @@ export function RegistrationForm({
   const form = useForm({
     defaultValues: { name: "", email: "", password: "" },
     onSubmit: async (value) => {
-      console.log("clickedddddddd");
+      console.log("clickedddddddd", value);
     },
   });
 
@@ -40,7 +41,66 @@ export function RegistrationForm({
         ></form>
 
         <FieldGroup>
-          <form.Field name="name" children={() => <Field></Field>} />
+          <form.Field
+            name="name"
+            children={(field) => {
+              return (
+                <Field>
+                  <FieldLabel htmlFor="name">Full Name</FieldLabel>
+                  <Input
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onChange={(e)=> field.handleChange(e.target.value)}
+                    type="text"
+                    placeholder="Md Selim Reza"
+                    required
+                  />
+                </Field>
+              );
+            }}
+          />
+          {/* email */}
+           <form.Field
+            name="email"
+            children={(field) => {
+              return (
+                <Field>
+                  <FieldLabel htmlFor="email">Email</FieldLabel>
+                  <Input
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onChange={(e)=> field.handleChange(e.target.value)}
+                    type="email"
+                    placeholder="md.selim.reza@example.com"
+                    required
+                  />
+                </Field>
+              );
+            }}
+          />
+
+          {/* password */}
+           <form.Field
+            name="password"
+            children={(field) => {
+              return (
+                <Field>
+                  <FieldLabel htmlFor="password">Password</FieldLabel>
+                  <Input
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onChange={(e)=> field.handleChange(e.target.value)}
+                    type="password"
+                    placeholder="Enter your password"
+                    required
+                  />
+                </Field>
+              );
+            }}
+          />
         </FieldGroup>
       </CardContent>
       <CardFooter className="flex justify-end">
