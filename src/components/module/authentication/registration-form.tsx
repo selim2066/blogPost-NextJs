@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { FieldGroup } from "@/components/ui/field";
+import { FieldGroup, Field } from "@/components/ui/field";
 import {useForm } from "@tanstack/react-form";
 
 export function RegistrationForm({
