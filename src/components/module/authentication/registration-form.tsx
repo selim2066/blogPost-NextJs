@@ -9,7 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useForm } from "@tanstack/react-form";
+import { FieldGroup } from "@/components/ui/field";
+import {useForm } from "@tanstack/react-form";
 
 export function RegistrationForm({
   ...props
@@ -30,17 +31,22 @@ export function RegistrationForm({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form id="reg-form"
+        <form
+          id="reg-form"
           onSubmit={(e) => {
             e.preventDefault();
             form.handleSubmit();
           }}
-        >
- </form>
+        ></form>
+
+        <FieldGroup>
+          <form.Field name="name" children={() => <Field></Field>} />
+        </FieldGroup>
       </CardContent>
-      <CardFooter  className="flex justify-end">
-          <Button form="reg-form" type="submit">Create Account</Button>
-       
+      <CardFooter className="flex justify-end">
+        <Button form="reg-form" type="submit">
+          Create Account
+        </Button>
       </CardFooter>
     </Card>
   );
