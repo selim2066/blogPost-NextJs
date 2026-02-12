@@ -4,10 +4,9 @@ import { getBlogs } from "@/actions/blog-action";
 import { useEffect, useState } from "react";
 
 export default function AboutPage() {
-  //await new Promise((resolve) => setTimeout(resolve, 3000));
   const [data, setData] = useState<string | null>(null);
   console.log(data)
-
+  
   useEffect(() => {
     (async()=>{
       const {postData}= await getBlogs()
@@ -18,3 +17,4 @@ export default function AboutPage() {
     <div>AboutPage</div>
   );
 }
+//await new Promise((resolve) => setTimeout(resolve, 3000));

@@ -1,22 +1,26 @@
-import { Button } from "@/components/ui/button"
+"use client";
+
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import {
-  Field,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/card";
+import { useForm } from "@tanstack/react-form";
 
-export function RegistrationForm({ ...props }: React.ComponentProps<typeof Card>) {
+export function RegistrationForm({
+  ...props
+}: React.ComponentProps<typeof Card>) {
+  const form = useForm({
+    defaultValues: { name: "", email: "", password: "" },
+    onSubmit: async (value) => {
+      console.log("clickedddddddd");
+    },
+  });
 
-  
   return (
     <Card {...props}>
       <CardHeader>
@@ -26,8 +30,35 @@ export function RegistrationForm({ ...props }: React.ComponentProps<typeof Card>
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
-          <FieldGroup>
+        <form id="reg-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            form.handleSubmit();
+          }}
+        >
+ </form>
+      </CardContent>
+      <CardFooter  className="flex justify-end">
+          <Button form="reg-form" type="submit">Create Account</Button>
+       
+      </CardFooter>
+    </Card>
+  );
+}
+
+/**
+<FieldGroup>
+              <Field>
+                <Button type="submit">Create Account</Button>
+                <Button variant="outline" type="button">
+                  Sign up with Google
+                </Button>
+                <FieldDescription className="px-6 text-center">
+                  Already have an account? <a href="#">Sign in</a>
+                </FieldDescription>
+              </Field>
+            </FieldGroup> 
+             <FieldGroup>
             <Field>
               <FieldLabel htmlFor="name">Full Name</FieldLabel>
               <Input id="name" type="text" placeholder="John Doe" required />
@@ -59,20 +90,5 @@ export function RegistrationForm({ ...props }: React.ComponentProps<typeof Card>
               <Input id="confirm-password" type="password" required />
               <FieldDescription>Please confirm your password.</FieldDescription>
             </Field>
-            <FieldGroup>
-              <Field>
-                <Button type="submit">Create Account</Button>
-                <Button variant="outline" type="button">
-                  Sign up with Google
-                </Button>
-                <FieldDescription className="px-6 text-center">
-                  Already have an account? <a href="#">Sign in</a>
-                </FieldDescription>
-              </Field>
-            </FieldGroup>
-          </FieldGroup>
-        </form>
-      </CardContent>
-    </Card>
-  )
-}
+            
+          </FieldGroup>**/
