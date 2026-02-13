@@ -60,7 +60,7 @@ export function RegistrationForm({
               );
             }}
           />
-          {/* email */}
+          {/* email */ }
            <form.Field
             name="email"
             children={(field) => {
