@@ -53,6 +53,11 @@ export function RegistrationForm({
     },
   });
 
+  const handleGoogleLogin = async() => {
+    // Implement Google login logic here
+    const data = await authClient.signIn.social({ provider: 'google', callbackURL: 'http://localhost:3000' })
+  }
+
   return (
     <Card {...props}>
       <CardHeader>
@@ -145,10 +150,13 @@ export function RegistrationForm({
           />
         </FieldGroup>
       </CardContent>
-      <CardFooter className="flex justify-end">
-        <Button form="reg-form" type="submit">
+      <CardFooter className="flex flex-col gap-5 justify-end">
+        <Button className="w-full" form="reg-form" type="submit">
           Create Account
         </Button>
+          <Button className="w-full" onClick={()=>handleGoogleLogin()} variant="outline" type="button">
+                  Login with Google
+                </Button>
       </CardFooter>
     </Card>
   );
