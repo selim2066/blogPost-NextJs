@@ -16,7 +16,9 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
 import { useForm } from "@tanstack/react-form";
+import { toast } from "sonner";
 import * as z from "zod";
 
 // schema
@@ -34,8 +36,20 @@ export function RegistrationForm({
     validators: {
       onSubmit: formSchema,
     },
-    onSubmit: async (value) => {
+    onSubmit: async ({ value }) => {
       console.log("clickedddddddd", value);
+      const toastId = toast.loading("Creating your account...");
+      try {
+        const { data, error } = await authClient.signUp.email(value);
+        if(error){
+          toast.error(error.message,{id: toastId});
+          return
+
+        }
+        toast.success("Account created successfully!",{id: toastId});
+      } catch (error) {
+        toast.error("Failed to create account. Please try again.",{id: toastId});
+      }
     },
   });
 
