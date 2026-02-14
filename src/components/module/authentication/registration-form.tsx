@@ -9,15 +9,31 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { useForm } from "@tanstack/react-form";
+import * as z from "zod";
+
+// schema
+const formSchema = z.object({
+  name: z.string().min(2, "This field is required"),
+  email: z.email(),
+  password: z.string().min(8, "Minimum 8 charecters Need"),
+});
 
 export function RegistrationForm({
   ...props
 }: React.ComponentProps<typeof Card>) {
   const form = useForm({
     defaultValues: { name: "", email: "", password: "" },
+    validators: {
+      onSubmit: formSchema,
+    },
     onSubmit: async (value) => {
       console.log("clickedddddddd", value);
     },
@@ -44,59 +60,71 @@ export function RegistrationForm({
           <form.Field
             name="name"
             children={(field) => {
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
+
               return (
-                <Field>
+                <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor="name">Full Name</FieldLabel>
                   <Input
                     id={field.name}
                     name={field.name}
                     value={field.state.value}
-                    onChange={(e)=> field.handleChange(e.target.value)}
+                    onChange={(e) => field.handleChange(e.target.value)}
                     type="text"
                     placeholder="Md Selim Reza"
                     required
                   />
+                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
                 </Field>
               );
             }}
           />
-          {/* email */ }
-           <form.Field
+          {/* email */}
+          <form.Field
             name="email"
             children={(field) => {
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
+
               return (
-                <Field>
+                <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor="email">Email</FieldLabel>
                   <Input
                     id={field.name}
                     name={field.name}
                     value={field.state.value}
-                    onChange={(e)=> field.handleChange(e.target.value)}
+                    onChange={(e) => field.handleChange(e.target.value)}
                     type="email"
                     placeholder="md.selim.reza@example.com"
                     required
                   />
+                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
                 </Field>
               );
             }}
           />
 
           {/* password */}
-           <form.Field
+          <form.Field
             name="password"
             children={(field) => {
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
+
               return (
-                <Field>
+                <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor="password">Password</FieldLabel>
                   <Input
                     id={field.name}
                     name={field.name}
                     value={field.state.value}
-                    onChange={(e)=> field.handleChange(e.target.value)}
+                    onChange={(e) => field.handleChange(e.target.value)}
                     type="password"
                     placeholder="Enter your password"
                     required
                   />
+                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
                 </Field>
               );
             }}
