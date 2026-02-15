@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { URL } from "url";
-import { roles } from "./constant/roles";
+import { Roles } from "./constant/roles";
 import { userService } from "./service/user.service";
 
 export async function proxy(request: NextRequest) {
@@ -16,7 +16,7 @@ export async function proxy(request: NextRequest) {
 
   if (data) {
     isAuthenticated = true;
-    isAdmin = data.user.role === roles.admin;
+    isAdmin = data.user.role === Roles.admin;
   }
   // user not authenticated at all
 
