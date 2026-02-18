@@ -11,6 +11,7 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
 import { env } from "@/env";
 import { cookies } from "next/headers";
+import { toast } from "sonner";
 
 const API_URL = env.API_URL;
 
@@ -24,6 +25,7 @@ export default function createBlogPageServer() {
     const blogData = {
       title,
       content,
+      isFeatured: true,
       tags: tags
         .split(",")
         .map((tag) => tag.trim())
@@ -39,7 +41,8 @@ export default function createBlogPageServer() {
       },
       body: JSON.stringify(blogData),
     });
-    console.log(res);
+    const post = await res.json();
+    //toast.success("Blog created successfully!")
   };
   return (
     <Card className="w-2xl mx-auto my-5">
