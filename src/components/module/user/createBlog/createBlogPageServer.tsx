@@ -10,6 +10,7 @@ import {
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
 import { env } from "@/env";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { toast } from "sonner";
 
@@ -43,6 +44,10 @@ export default function createBlogPageServer() {
     });
     const post = await res.json();
     //toast.success("Blog created successfully!")
+
+    if (res.ok) {
+      revalidateTag("blog-posts","max"); // Revalidate all pages tagged with "blog-posts" to reflect the new blog post
+    }
   };
   return (
     <Card className="w-2xl mx-auto my-5">

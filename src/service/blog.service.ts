@@ -64,6 +64,9 @@ export const blogService = {
         config.next = { revalidate: options.revalidate };
       }
 
+      config.next={...config.next, tags: ["blog-posts"]} // Add cache tag for better ISR cache management
+      
+
       /* ##2 If cache option is provided, control fetch caching behavior
        Example: cache: "no-store" => always fresh data (SSR)
       */
