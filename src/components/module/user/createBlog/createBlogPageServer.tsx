@@ -9,13 +9,38 @@ import {
 } from "@/components/ui/card";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
+import { env } from "@/env";
+import { cookies } from "next/headers";
+
+const API_URL = env.API_URL;
 
 export default function createBlogPageServer() {
-
   const createBlog = async (formData: FormData) => {
-      "use server";
-      console.log(formData.get("title"))
-  }
+    "use server";
+    const title = formData.get("title") as string;
+    const content = formData.get("content") as string;
+    const tags = formData.get("tags") as string;
+
+    const blogData = {
+      title,
+      content,
+      tags: tags
+        .split(",")
+        .map((tag) => tag.trim())
+        .filter((tag) => tag !== ""),
+    };
+
+    const cookieStore = await cookies();
+    const res = await fetch(`${API_URL}/post`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: cookieStore.toString(),
+      },
+      body: JSON.stringify(blogData),
+    });
+    console.log(res);
+  };
   return (
     <Card className="w-2xl mx-auto my-5">
       <CardHeader>
@@ -34,19 +59,18 @@ export default function createBlogPageServer() {
                 placeholder="Write Your Blog Title"
                 className="border border-gray-300 rounded-md px-3 py-2 w-full"
               />
-             
             </Field>
-             <Field>
+            <Field>
               <FieldLabel htmlFor="content">Content</FieldLabel>
-              
-             <Textarea
+
+              <Textarea
                 id="content"
                 name="content"
                 placeholder="Write your blog content here..."
                 className="border border-gray-300 rounded-md px-3 py-2 w-full mt-4 h-40"
               />
             </Field>
-             <Field>
+            <Field>
               <FieldLabel htmlFor="tags">Tags</FieldLabel>
               <input
                 type="text"
@@ -55,7 +79,6 @@ export default function createBlogPageServer() {
                 placeholder="Write Your Blog Tags (comma separated)"
                 className="border border-gray-300 rounded-md px-3 py-2 w-full"
               />
-             
             </Field>
           </FieldGroup>
         </form>
