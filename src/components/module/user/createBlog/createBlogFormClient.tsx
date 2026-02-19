@@ -1,4 +1,5 @@
 "use client";
+import { createBlogPost } from "@/actions/blog-action";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,6 +13,7 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "@tanstack/react-form";
+import { toast } from "sonner";
 import * as z from "zod";
 //import { zodValidator } from "@tanstack/zod-form-adapter";
 
@@ -39,6 +41,29 @@ export default function CreateBlogFormClient() {
     },
     onSubmit: async ({ value }) => {
       console.log("clicked", value);
+      const toastId = toast.loading("Creating blog post...");
+      const blogData = {
+      ...value,
+       
+      tags: value.tags
+        .split(",")
+        .map((tag) => tag.trim())
+        .filter((tag) => tag !== ""),
+    };
+    console.log(blogData)
+    try {
+      const res = await createBlogPost(blogData);
+      console.log(res)
+      if(res.error){
+        toast.error(res.error.message, { id: toastId });
+        return;
+      }
+      toast.success("Blog created successfully!", { id: toastId });
+
+      
+    } catch (error) {
+      toast.error("Failed to create blog post. Please try again.");
+    }
     },
   });
 

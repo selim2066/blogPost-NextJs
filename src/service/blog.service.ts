@@ -1,4 +1,5 @@
 import { env } from "@/env";
+import { cookies } from "next/headers";
 
 // Base API URL loaded from environment variables
 // This allows changing backend URL without touching code
@@ -28,6 +29,18 @@ interface ServiceOptions {
   revalidate?: number; // ISR revalidation time in seconds
 }
 
+// blogdata shape for createBlogPost
+export interface BlogData {
+  title: string;
+  content: string;
+  isFeatured?: boolean;
+  tags?: string[];
+}
+// export interface BlogData {
+//   title: string;
+//   content: string;
+//   tag?: string[];
+// }
 export const blogService = {
   //  !getALLblogPosts
   /**
@@ -64,8 +77,7 @@ export const blogService = {
         config.next = { revalidate: options.revalidate };
       }
 
-      config.next={...config.next, tags: ["blog-posts"]} // Add cache tag for better ISR cache management
-      
+      config.next = { ...config.next, tags: ["blog-posts"] }; // Add cache tag for better ISR cache management
 
       /* ##2 If cache option is provided, control fetch caching behavior
        Example: cache: "no-store" => always fresh data (SSR)
@@ -109,7 +121,40 @@ export const blogService = {
       };
     }
   },
+
+  // ! createBlogPost
+  createBlogPost: async (blogData: BlogData) => {
+    try {
+      const cookieStore = await cookies();
+      const res = await fetch(`${API_URL}/post`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        },
+        body: JSON.stringify(blogData),
+      });
+      const data = await res.json();
+      if (data.error) {
+        return {
+          data: null,
+          error: { message: "Error: Post not created. loaction toast{blog.service.ts}" },
+        };
+      }
+
+      return { postData: data, error: null };
+    } catch (error) {
+      return {
+        data: null,
+        error: {
+          message: "Error creating blog post {blog.service.ts}",
+          details: error,
+        },
+      };
+    }
+  },
 };
+
 // !This file is a blog service that fetches blog posts from your backend API in a flexible way.
 
 // Main Goal:

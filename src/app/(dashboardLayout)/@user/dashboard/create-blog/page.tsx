@@ -9,11 +9,11 @@ export default async function CreateBlogPage() {
     <div>
       {/* <CreateBlogFormServer /> */}
       <CreateBlogFormClient/>
-      {/* {postData.data.map((itme: BlogPost) => (
+      {postData.data.map((itme: BlogPost) => (
         <div key={itme.id}>
           <h2>{itme.title}</h2>
         </div>
-      ))} */}
+      ))}
     </div>
   );
 }
