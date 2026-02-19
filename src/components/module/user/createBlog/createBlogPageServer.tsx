@@ -12,7 +12,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { env } from "@/env";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
-import { toast } from "sonner";
 
 const API_URL = env.API_URL;
 
@@ -46,7 +45,7 @@ export default function createBlogPageServer() {
     //toast.success("Blog created successfully!")
 
     if (res.ok) {
-      revalidateTag("blog-posts","max"); // Revalidate all pages tagged with "blog-posts" to reflect the new blog post
+      revalidateTag("blog-posts", "max"); // Revalidate all pages tagged with "blog-posts" to reflect the new blog post
     }
   };
   return (
@@ -75,7 +74,7 @@ export default function createBlogPageServer() {
                 id="content"
                 name="content"
                 placeholder="Write your blog content here..."
-                className="border border-gray-300 rounded-md px-3 py-2 w-full mt-4 h-40"
+                className="border border-gray-300 rounded-md px-3 py-2 w-full mt-4 h-60"
               />
             </Field>
             <Field>
