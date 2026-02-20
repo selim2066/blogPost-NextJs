@@ -21,6 +21,7 @@ interface GetBlogsParams {
   isFeatured?: boolean; // Filter for featured blogs
   search?: string; // Search keyword for blogs
   page?: string; // Pagination page number
+  limit?: string; // Pagination page size
 }
 
 // Options to control Next.js fetch behavior

@@ -15,20 +15,18 @@ import { BlogPost } from "@/types";
 export default function BlogCard({ post }: { post: BlogPost }) {
   return (
     <Card className="h-full overflow-hidden border-none shadow-md transition-all duration-300 pb-2">
-      <div className="relative h-56 w-full overflow-hidden">
-        {post.thumbnail ? (
-          <Image
-            src={post.thumbnail}
-            alt={post.title}
-            fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
-            No Image
-          </div>
-        )}
-      </div>
+     <div className="relative h-56 w-full overflow-hidden">
+  <Image
+    src={
+      post.thumbnail ||
+      "https://images.unsplash.com/photo-1432821596592-e2c18b78144f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    }
+    alt={post.title}
+    fill
+    className="object-cover transition-transform duration-300"
+  />
+
+</div>
 
       <CardHeader className="pb-2">
         <CardTitle className="line-clamp-2 text-xl font-bold transition-colors group-hover:text-primary">
