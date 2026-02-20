@@ -7,9 +7,9 @@ import { BlogPost } from "@/types";
 import Image from "next/image";
 
 export default async function Home() {
-  const featuredPostsPromise = blogService.getBlogPosts({ isFeatured: true });
+  const featuredPostsPromise = blogService.getBlogPosts({ isFeatured: false });
   const postsPromise = blogService.getBlogPosts(
-    { limit: "3" },
+    { limit: "6" },
     { revalidate: 10 },
   );
 
@@ -50,7 +50,7 @@ export default async function Home() {
             className="object-cover rounded-md"
           /> */}
           <Image
-            src="https://images.unsplash.com/photo-1488229297570-58520851e868?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://images.unsplash.com/photo-1564501676255-20610ef48161?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             fill
             priority
             alt="Hero"
