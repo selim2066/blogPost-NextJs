@@ -10,7 +10,7 @@ const posts = response.postData?.data || [];
     <div>
       <h1 className="text-2xl font-bold mb-6">History Page</h1>
 
-      <HistoryTable />
+      <HistoryTable posts={posts} />
 
     </div>
   );
