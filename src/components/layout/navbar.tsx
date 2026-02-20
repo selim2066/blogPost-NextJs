@@ -1,22 +1,17 @@
 "use client";
 
 import { Menu } from "lucide-react";
-import  Link  from "next/link";
+import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
-import {
-  Accordion,
- 
-} from "@/components/ui/accordion";
+import { Accordion } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
@@ -67,8 +62,11 @@ const Navbar = ({
   menu = [
     { title: "Home", url: "/" },
     {
-      title: "Blogs", url: "/blogs",
-    },{title:"About", url:"/about"}
+      title: "Blogs",
+      url: "/blogs",
+    },
+    { title: "About", url: "/about" },
+    {title:"Dashboard", url:"/dashboard"}
   ],
   auth = {
     login: { title: "Login", url: "/login" },
@@ -101,7 +99,7 @@ const Navbar = ({
               </NavigationMenu>
             </div>
           </div>
-          
+
           {/* mode/ Sign In/Sign Up Buttons */}
           <div className="flex gap-2">
             <ModeToggle />
@@ -125,7 +123,7 @@ const Navbar = ({
                 alt={logo.alt}
               />
             </a>
-            
+
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon">
@@ -134,7 +132,7 @@ const Navbar = ({
               </SheetTrigger>
               <SheetContent className="overflow-y-auto">
                 <SheetHeader>
-                  <SheetTitle className="flex flex-col gap-5" >
+                  <SheetTitle className="flex flex-col gap-5">
                     <a href={logo.url} className="flex items-center gap-2">
                       <img
                         src={logo.src}
@@ -142,7 +140,7 @@ const Navbar = ({
                         alt={logo.alt}
                       />
                     </a>
-                  <ModeToggle />
+                    <ModeToggle />
                   </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-6 p-4">
@@ -154,7 +152,7 @@ const Navbar = ({
                   >
                     {menu.map((item) => renderMobileMenuItem(item))}
                   </Accordion>
-{/* login signup */}
+                  {/* login signup */}
                   <div className="flex flex-col gap-3">
                     <Button asChild variant="outline">
                       <Link href={auth.login.url}>{auth.login.title}</Link>
@@ -176,29 +174,29 @@ const Navbar = ({
 // home pricing blog
 
 const renderMenuItem = (item: MenuItem) => {
- 
-
   return (
     <NavigationMenuItem key={item.title}>
-      <NavigationMenuLink asChild
+      <NavigationMenuLink
+        asChild
         href={item.url}
         className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground "
       >
-       <Link href={item.url}>{item.title}</Link>
+        <Link href={item.url}>{item.title}</Link>
       </NavigationMenuLink>
     </NavigationMenuItem>
   );
 };
 
 const renderMobileMenuItem = (item: MenuItem) => {
- 
-
   return (
-    <Link  key={item.title} href={item.url} className="text-md font-semibold text-amber-600">
+    <Link
+      key={item.title}
+      href={item.url}
+      className="text-md font-semibold text-amber-600"
+    >
       {item.title}
     </Link>
   );
 };
-
 
 export { Navbar };
