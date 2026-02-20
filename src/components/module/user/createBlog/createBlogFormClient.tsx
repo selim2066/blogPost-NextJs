@@ -52,7 +52,7 @@ export default function CreateBlogFormClient() {
     };
     console.log(blogData)
     try {
-      const res = await createBlogPost(blogData);
+      const res = await createBlogPost(blogData); //calling server action to create blog post and revalidate cache
       console.log(res)
       if(res.error){
         toast.error(res.error.message, { id: toastId });
