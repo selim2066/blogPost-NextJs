@@ -1,8 +1,9 @@
 import HistoryTable from "@/components/module/user/historyTable/HistoryTable";
 import { blogService } from "@/service/blog.service";
 
-export default async function HistoryPage() {
-const response= await blogService.getBlogPosts()
+export default async function HistoryPage({searchParams}:{searchParams: Promise<{page: string}>}) {
+  const { page } = await searchParams;
+const response= await blogService.getBlogPosts({page});
 
 const posts = response.postData?.data || [];
 
