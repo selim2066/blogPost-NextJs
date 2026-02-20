@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import {
   Table,
   TableBody,
@@ -15,21 +16,36 @@ export default function HistoryTable({ posts }: { posts: BlogPost[] }) {
       <Table className="w-[70%] mx-auto my-10">
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
-          <TableRow>
-            <TableHead>Title</TableHead>
-            <TableHead>Tags</TableHead>
-            <TableHead>Views</TableHead>
-            <TableHead>Comments</TableHead>
+          <TableRow className="bg-gray-100 text-xl">
+            <TableHead className="text-black font-bold">Title</TableHead>
+            <TableHead className="text-black font-bold">Tags</TableHead>
+            <TableHead className="text-black font-bold">Views</TableHead>
+            <TableHead className="text-black font-bold">Featured</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {posts.map((post) => (
             <TableRow key={post.id}>
               <TableCell>{post.title}</TableCell>
-              <TableCell>{post.tags}</TableCell>
+              
+               <TableCell>
+                  <div className="flex flex-wrap gap-1">
+                    {post.tags && post.tags.length > 0 ? (
+                      post.tags.map((tag, index) => (
+                        <Badge key={index} variant="secondary">
+                          {tag}
+                        </Badge>
+                      ))
+                    ) : (
+                      <span className="text-sm text-muted-foreground">
+                        No tags
+                      </span>
+                    )}
+                  </div>
+                </TableCell>
               <TableCell>{post.views}</TableCell>
               <TableCell>
-                {post.isFeatured ? "Featured" : "Not Featured"}
+                {post.isFeatured ? <Badge variant="outline">Featured</Badge> : <Badge variant="destructive">Not Featured</Badge>}
               </TableCell>
             </TableRow>
           ))}
