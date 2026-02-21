@@ -61,28 +61,32 @@ export default async function Home() {
           Welcome to MSR Blog
         </h1>
       </div>
-
-      {featuredPosts?.postData?.data && featuredPosts.postData.data.length > 0 && (
-        <div className="mb-12">
-          <h2 className={"text-2xl font-bold mb-6"}>Featured Posts</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {featuredPosts.postData.data.slice(0, 2).map((post: BlogPost) => (
-              <div key={post.id} className="border rounded-lg overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1522252234503-e356532cafd5?q=80&w=1025&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt={post.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-4">
-                  <h3 className="font-bold text-xl mb-2">{post.title}</h3>
-                  <p className="text-gray-600 line-clamp-2">{post.content}</p>
+      {/* featured post */}
+      {featuredPosts?.postData?.data &&
+        featuredPosts.postData.data.length > 0 && (
+          <div className="mb-12">
+            <h2 className={"text-2xl font-bold mb-6"}>Featured Posts</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {featuredPosts.postData.data.slice(0, 2).map((post: BlogPost) => (
+                <div
+                  key={post.id}
+                  className="border rounded-lg overflow-hidden"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1522252234503-e356532cafd5?q=80&w=1025&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt={post.title}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-4">
+                    <h3 className="font-bold text-xl mb-2">{post.title}</h3>
+                    <p className="text-gray-600 line-clamp-2">{post.content}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      )}
-
+        )}
+      {/* all posts */}
       <div>
         <h2 className="text-2xl font-bold mb-6">All Posts</h2>
         <div className="grid grid-cols-3 gap-5">
