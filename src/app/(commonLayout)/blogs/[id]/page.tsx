@@ -51,8 +51,8 @@ export default async function BlogPage({
       <Separator className="mb-8" />
 
       {/* Content */}
-      <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-foreground">
-        <p className="whitespace-pre-wrap text-lg leading-8">{blog.content}</p>
+      <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-foreground ">
+        <p className="whitespace-pre-wrap text-sm leading-8">{blog.content}</p>
       </div>
 
       <Separator className="my-8" />
