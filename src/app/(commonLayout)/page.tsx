@@ -34,7 +34,7 @@ export default async function Home() {
 
   // console.timeEnd("Parallel");
   return (
-    <div className="max-w-7xl mx-auto px-4">
+    <div className="max-w-7xl mx-auto px-4 mb-10">
       <div className="mb-12 mt-8 h-[calc(100vh-80px)] flex flex-col justify-center">
         <div className="relative w-full h-96 mb-6">
           {/* <img
