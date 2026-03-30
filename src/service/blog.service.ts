@@ -51,6 +51,7 @@ export const blogService = {
    * @param params   Optional query filters (isFeatured, search)
    * @param options  Optional Next.js fetch configuration (cache, revalidate)
    */
+  // !getBlogPosts
   getBlogPosts: async (params?: GetBlogsParams, options?: ServiceOptions) => {
     try {
       // Create a URL object for safe and structured URL manipulation
