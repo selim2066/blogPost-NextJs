@@ -56,10 +56,11 @@ export const blogService = {
     try {
       // Create a URL object for safe and structured URL manipulation
       // This avoids manual string concatenation mistakes
-      const url = new URL(`${API_URL}/post`);
+      const url = new URL(`${API_URL}/post`); //it creates a URL object with the base API URL and the /post endpoint, which is where we fetch the blog posts from. The URL object allows us to easily manipulate the URL, such as adding query parameters, without worrying about string concatenation or formatting issues.
 
       // Dynamically append query parameters if provided
       // Converts params object into key=value pairs
+      
       if (params) {
         Object.entries(params).forEach(([key, value]) => {
           if (value !== undefined && value !== null && value !== "") {
